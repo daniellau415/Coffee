@@ -19,9 +19,8 @@ class CoffeeController {
 
     func searchCoffee(with location: CLLocationCoordinate2D, completion: @escaping([CoffeeVenue]?) -> Void) {
 
-        let coffeeURL = URL(string: "https://api.foursquare.com/v2/venues/search?ll=\(location.latitude),\(location.longitude)&v=20180618&&categoryId=4bf58dd8d48988d1e0931735&query=coffee&limit=1&radius=3000&client_id=HPSDD5GDWPLXUZVAS5WOQT35O1STA0WWAGAY5RTAC1PTKZWW&client_secret=NXOFPSLOSBZOPYKTZTTJZZ3RJTNKNJ3QTNO501WRL152H2L0")!
+        let coffeeURL = URL(string: "https://api.foursquare.com/v2/venues/search?ll=\(location.latitude),\(location.longitude)&v=20180618&&categoryId=4bf58dd8d48988d1e0931735&query=coffee&limit=3&radius=5000&client_id=HPSDD5GDWPLXUZVAS5WOQT35O1STA0WWAGAY5RTAC1PTKZWW&client_secret=NXOFPSLOSBZOPYKTZTTJZZ3RJTNKNJ3QTNO501WRL152H2L0")!
 
-        print(coffeeURL)
         let dataTask = URLSession.shared.dataTask(with: coffeeURL) { (data, response, error) in
             if let data = data {
                 let jsonDecoder = JSONDecoder()
@@ -41,5 +40,4 @@ class CoffeeController {
         }
         dataTask.resume()
     }
-    
 }
