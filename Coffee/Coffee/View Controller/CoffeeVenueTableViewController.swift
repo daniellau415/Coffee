@@ -36,6 +36,7 @@ class CoffeeVenueTableViewController: UIViewController {
         CoffeeController.shared.searchCoffee(with: coordinate) { (coffee) in
             DispatchQueue.main.async {
                 guard let coffee = coffee else { return }
+
                 CoffeeController.shared.coffeevenues = coffee
                 
                 self.tableView.reloadData()
@@ -52,9 +53,11 @@ extension CoffeeVenueTableViewController: UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "coffeeCell") as! CoffeeVenueTableViewCell
-        
+
         let coffee = CoffeeController.shared.coffeevenues[indexPath.row]
         cell.coffeevenue = coffee
+        
+        
         CoffeePhotoController.shared.searchCoffePhotoLink(with: coffee.id) { (photo) in
             if let photo = photo {
                 guard let suffix = photo.first?.suffix else { return }
@@ -68,6 +71,7 @@ extension CoffeeVenueTableViewController: UITableViewDataSource, UITableViewDele
                 })
             }
         }
+ 
         return cell
     }
 }

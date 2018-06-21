@@ -40,5 +40,4 @@ class CoffeeVenueTableViewCell: UITableViewCell {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var stateLabel: UILabel!
     
-    
 }

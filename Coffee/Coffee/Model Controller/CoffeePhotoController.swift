@@ -24,9 +24,15 @@ class CoffeePhotoController {
             
             ]
         let baseURL = URL(string: "https://api.foursquare.com/v2/venues/\(searchID)/photos?")!
-        let url = baseURL.withQueries(queries)!
         
-        let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
+        
+        let queryItems = queries.compactMap({ URLQueryItem(name: $0.key, value: $0.value )})
+        components?.queryItems = queryItems
+        
+        guard let requestURL = components?.url else { completion(nil); return }
+  
+        let dataTask = URLSession.shared.dataTask(with: requestURL) { (data, response, error) in
             if let data = data {
                 let jsonDecoder = JSONDecoder()
                 do {
